@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { config } from './config'
-import { API_HEADERS } from './lib/consts'
+import { API_OPTIONS } from './lib/consts'
+import { requestAsync } from './lib/utilis'
 
 /** API Command to set Thermostat Mode */
 const thermostatModeCommand = ( mode ) => [
@@ -41,32 +41,32 @@ export const thermostats = (deviceId) => {
   const commands = {
     /** Braod overview of thermostat status */
     getStatus: async () => {
-      const resp = await axios.get(thermostatApi, { headers: API_HEADERS() } )
+      const resp = await requestAsync(thermostatApi, API_OPTIONS() )
       return resp.data
     },
     /** Set thermostat mode
      * @param {'off' | 'cool' | 'heat' | 'auto' } mode
     */
     setMode: async (mode) => {
-      await axios.post(thermostatCommandsApi, {
+      await requestAsync(thermostatCommandsApi, API_OPTIONS('POST'), {
         commands: thermostatModeCommand(mode)
-      }, { headers: API_HEADERS() } )
+      })
     },
     /** Set A/C temperature
      * @param {integer} temp - Temp at which A/C will turn on
     */
     setCoolingSetpoint: async (temp) => {
-      await axios.post(thermostatCommandsApi, {
+      await requestAsync(thermostatCommandsApi, API_OPTIONS('POST'), {
         commands: coolingSetpointCommand(temp)
-      }, { headers: API_HEADERS() } )
+      })
     },
     /** Set heating temperature
      * @param {integer} temp - Temp at which heat will turn on
     */
     setHeatingSetpoint: async (temp) => {
-      await axios.post(thermostatCommandsApi, {
+      await requestAsync(thermostatCommandsApi, API_OPTIONS('POST'), {
         commands: heatingSetpointCommand(temp)
-      }, { headers: API_HEADERS() } )
+      })
     },
   }
 

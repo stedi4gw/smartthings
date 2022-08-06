@@ -1,6 +1,9 @@
 import { config } from '../config'
 
-export const API_HEADERS = () => ({
-  authorization: `Bearer ${config.smartThingsKey}`,
-  accept: 'application/vnd.smartthings+json;v=1',
+export const API_OPTIONS = (method = 'GET') => ({
+  method,
+  headers: {
+    'Authorization': `Bearer ${config.smartThingsKey}`,
+    'Accept': 'application/vnd.smartthings+json;v=1',
+  },
 })

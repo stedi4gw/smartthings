@@ -12,16 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/stedi4gw/smartthings.git"
   },
-  "author": "Stedi4gW LLC",
+  "author": "Stedi 4gW LLC",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/stedi4gw/smartthings/issues"
   },
   "homepage": "https://github.com/stedi4gw/smartthings#readme",
-  "dependencies": {
-    "axios": "^0.27.2",
-    "dotenv": "^16.0.1"
-  },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.2",

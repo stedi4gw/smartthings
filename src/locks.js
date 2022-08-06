@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { config } from './config'
-import { API_HEADERS } from './lib/consts'
+import { API_OPTIONS } from './lib/consts'
+import { requestAsync } from './lib/utilis'
 
 /** API Command to create Key Code on smart lock
  * @param {integer} id - unique id of code 
@@ -49,14 +49,14 @@ export const locks = (deviceId) => {
     /** TODO: Define return type */
     /** Get the overview of lock status */
     getStatus: async () => {
-      const resp = await axios.get(lockCodesApi, { headers: API_HEADERS() } )
+      const resp = await requestAsync(lockCodesApi, API_OPTIONS() )
       return resp.data
     },
 
     /** TODO: Define return type */
     /** Get existing lock codes */
     getKeyCodes: async () => {
-      const resp = await axios.get(lockCodesApi, { headers: API_HEADERS() } )
+      const resp = await requestAsync(lockCodesApi, API_OPTIONS() )
       return resp.data.lockCodes.lockCodes.value
     },
 
@@ -66,9 +66,9 @@ export const locks = (deviceId) => {
      * @param {string} name - display name of code
     */
     setKeyCode: async (id, code, name) => {
-      await axios.post(lockCommandsApi, {
+      await requestAsync(lockCommandsApi, API_OPTIONS('POST'), {
         commands: setKeyCodeCommand(id, code, name)
-      }, { headers: API_HEADERS() } )
+      })
     },
 
     /** Updates friendly name of key code
@@ -76,18 +76,18 @@ export const locks = (deviceId) => {
      * @param {string} name - display name of code
     */
     updateKeyCodeName: async (id, name) => {
-      await axios.post(lockCommandsApi, {
+      await requestAsync(lockCommandsApi, API_OPTIONS('POST'), {
         commands: updateKeyCodeNameCommand(id, name)
-      }, { headers: API_HEADERS() } )
+      } )
     },
 
     /** Clears key code
      * @param {integer} id - unique id of code 
     */
     clearKeyCode: async (id) => {
-      await axios.post(lockCommandsApi, {
+      await requestAsync(lockCommandsApi, API_OPTIONS('POST'), {
         commands: clearKeyCodeCommand(id)
-      }, { headers: API_HEADERS() } )
+      })
     }
   }
 }
