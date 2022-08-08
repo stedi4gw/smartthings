@@ -1,7 +1,7 @@
 {
-  "name": "smartthings",
-  "version": "1.0.0",
-  "description": "Simplified device controllers for Samsung SmartThings",
+  "name": "@stedi4gw/smartthings",
+  "version": "0.0.1",
+  "description": "Samsung SmartThings. Simplified.",
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
