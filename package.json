@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Samsung SmartThings. Simplified.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "babel src --out-dir dist",
-    "test": "jest --config ./jest.config.json",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.json",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
@@ -19,11 +19,6 @@
   },
   "homepage": "https://github.com/stedi4gw/smartthings#readme",
   "devDependencies": {
-    "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.18.2",
-    "@babel/node": "^7.17.10",
-    "@babel/preset-env": "^7.18.2",
-    "babel-jest": "^28.1.0",
     "jest": "^28.1.0",
     "nock": "^13.2.4"
   }
