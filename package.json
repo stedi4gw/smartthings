@@ -5,8 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "node -e \"fs.rm('./dist', { recursive: true }, (err) => {})\" && node -e \"fs.cp('./src', './dist', { recursive: true, filter: (f) => !f.includes('spec.js') }, (err) => {})\" && node -e \"fs.copyFile('package.json', './dist/package.json', (err) => {})\" && node -e \"fs.copyFile('README.md', './dist/README.md', (err) => {})\"",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "release": "npm publish --access public ./dist"
   },
   "repository": {
     "type": "git",
