@@ -11,7 +11,7 @@ export const devices = () => {
      * @property {string} id - a string property of SpecialType
      *//**
     * Retrieves full list of devices
-    * @returns {Device[]}
+    * @returns {Promise<Device[]>}
     */
     getDeviceList: async () => await recurseNext(devicesApi),
   }
