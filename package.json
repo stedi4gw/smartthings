@@ -1,14 +1,19 @@
 {
   "name": "@stedi4gw/smartthings",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Samsung SmartThings. Simplified.",
   "main": "index.js",
+  "types": "index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "node -e \"fs.rm('./dist', { recursive: true }, (err) => {})\" && node -e \"fs.cp('./src', './dist', { recursive: true, filter: (f) => !f.includes('spec.js') }, (err) => {})\" && node -e \"fs.copyFile('package.json', './dist/package.json', (err) => {})\" && node -e \"fs.copyFile('README.md', './dist/README.md', (err) => {})\"",
+    "make:dist": "node -e \"fs.cp('./src', './dist', { recursive: true, filter: (f) => !f.includes('spec.js') }, (err) => {})\" && node -e \"fs.copyFile('package.json', './dist/package.json', (err) => {})\" && node -e \"fs.copyFile('README.md', './dist/README.md', (err) => {})\"",
+    "build:clean": "node -e \"fs.rm('./dist', { recursive: true }, (err) => {})\"",
+    "build:other": "node -e \"fs.copyFile('package.json', './dist/package.json', (err) => {})\" && node -e \"fs.copyFile('README.md', './dist/README.md', (err) => {})\"",
+    "build:tsc": "tsc --allowJs -d --rootDir ./src --outDir ./dist **/*.js",
+    "build": "npm run build:clean && npm run build:tsc && npm run build:other",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./jest.config.json",
     "test:watch": "npm run test -- --watch",
-    "release": "npm publish --access public ./dist"
+    "release": "npm run build && npm publish --access public ./dist"
   },
   "repository": {
     "type": "git",
@@ -22,6 +27,7 @@
   "homepage": "https://github.com/stedi4gw/smartthings#readme",
   "devDependencies": {
     "jest": "^28.1.0",
-    "nock": "^13.2.4"
+    "nock": "^13.2.4",
+    "typescript": "^4.7.4"
   }
 }
